@@ -1,0 +1,20 @@
+[
+    {
+        "title": "Пончик з шоколадом",
+        "price": 20,
+        "image": "('../img/donat1.jpg')"
+    },
+
+    {
+        "title": "Пончик з ваніллю",
+        "price": 20,
+        "image": "('../img/donat2.jpg')"
+    },
+
+    {
+        "title": "Пончик з полуницею",
+        "price": 30,
+        "image": "('../img/donat3.jpg')"
+    }
+]
+
