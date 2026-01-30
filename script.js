@@ -28,8 +28,7 @@ async function getProducts() {
 // Генеруємо HTML-код для карточки товару
 function getCardHTML(product) {
     // Створюємо JSON-строку з даними про товар і зберігаємо її в data-атрибуті
-    let productData = JSON.stringify(product)
-
+    let productData = JSON.stringify(product).replace(/'/g, "&#39;"); // Екранізуємо одинарні лапки
     return `
         <div class="my-card" style="">
             <img src="img/${product.image}">
