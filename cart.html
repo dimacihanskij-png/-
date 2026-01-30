@@ -27,9 +27,6 @@
                         <li class="nav-item">
                             <a class='nav-link' href='index.html#products'>Товари</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href='#about'>Кошик</a>
-                        </li>
                     </ul>
 
                     <button class="cart-btn" id="cartBtn">
@@ -84,18 +81,31 @@
                     <label for="phone">Номер телефону:</label>
                     <input class="form-control" type="tel" id="phone" name="phone" required>
                 </div>
-
                 <div class="form-group mt-3">
                     <label for="deliveryMethod">Спосіб доставки:</label>
                     <select class="form-select" id="deliveryMethod" name="deliveryMethod" required>
-                        <option value="standard">Нова пошта</option>
-                        <option value="express">Укрпошта</option>
+                        <option value="nova-poshta">Нова пошта</option>
+                        <option value="ukrposhta">Укрпошта</option>
+                        <option value="email">Електронна пошта</option>
                     </select>
                 </div>
 
-                <div class="form-group mt-3">
-                    <label for="address">Адреса доставки:</label>
-                    <input class="form-control" type="text" id="address" name="address" required>
+                <div id="postalDeliveryFields" class="delivery-fields" style="display: none;">
+                    <div class="form-group mt-3">
+                        <label for="city">Місто:</label>
+                        <input class="form-control" type="text" id="city" name="city">
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="postOfficeAddress">Адреса відділення:</label>
+                        <input class="form-control" type="text" id="postOfficeAddress" name="postOfficeAddress">
+                    </div>
+                </div>
+
+                <div id="emailDeliveryField" class="delivery-fields" style="display: none;">
+                    <div class="form-group mt-3">
+                        <label for="deliveryEmail">Електронна пошта для доставки:</label>
+                        <input class="form-control" type="email" id="deliveryEmail" name="deliveryEmail">
+                    </div>
                 </div>
 
                 <div class="form-group mt-3">
@@ -105,7 +115,7 @@
                 <button type="submit" class="cart-btn margin-y">Підтвердити</button>
 
             </form>
-        </section>       
+        </section>
     </main>
     <footer>
         <button id="themeToggle"><i class="bi bi-brightness-high"></i></button>
@@ -117,8 +127,8 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src='https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js'></script>
-    <script src="js/script.js"></script>
-    <script src="js/cart.js"></script>
+    <script src="script.js"></script>
+    <script src="cart.js"></script>
 
 
 </body>

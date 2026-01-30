@@ -1,22 +1,21 @@
-const products = [
-    { name: "Пончик з шоколадом", price: 20, image: "https://main-cdn.sbermegamarket.ru/big1/hlr-system/211/728/941/410/916/6/100041107279b0.jpg" },
-    { name: "Пончик з ваніллю", price: 20, image: "https://main-cdn.sbermegamarket.ru/big2/hlr-system/380/659/434/122/319/43/100046978499b1.png" },
-    { name: "Пончик з полуницею", price: 30, image: "https://main-cdn.sbermegamarket.ru/big1/hlr-system/-15/286/944/411/228/184/100046791634b0.png" },
-];
+// Функція для отримання значення кукі за ім'ям
+function getCookieValue(cookieName) {
+    // Розділяємо всі куки на окремі частини
+    const cookies = document.cookie.split(';');
 
-const productsContainer = document.querySelector('.products');
-products.forEach(product => {
-    const productCard = document.createElement('div');
-    productCard.className = 'card';
-    productCard.innerHTML = `
-                    <img src="${product.image}" class="card-img-top" alt="${product.name}">
-                    <div class="card-body">
-                        <h5 class="card-title">${product.name}</h5>
-                        <p class="card-text">Ціна: ${product.price} грн</p>
-                    </div>
-                `;
-    productsContainer.appendChild(productCard);
-});
+    // Шукаємо куки з вказаним ім'ям
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim(); // Видаляємо зайві пробіли
+
+        // Перевіряємо, чи починається поточне кукі з шуканого імені
+        if (cookie.startsWith(cookieName + '=')) {
+            // Якщо так, повертаємо значення кукі
+            return cookie.substring(cookieName.length + 1); // +1 для пропуску символу "="
+        }
+    }
+    // Якщо кукі з вказаним іменем не знайдено, повертаємо порожній рядок або можна повернути null
+    return '';
+}
 
 // Отримуємо дані про товари з JSON файлу
 async function getProducts() {
@@ -24,6 +23,7 @@ async function getProducts() {
     let products = await response.json();
     return products;
 };
+
 
 // Генеруємо HTML-код для карточки товару
 function getCardHTML(product) {
@@ -56,7 +56,7 @@ getProducts().then(function (products) {
             productsList.innerHTML += getCardHTML(product)
         })
     }
-    
+
     // Отримуємо всі кнопки "Купити" на сторінці
     let buyButtons = document.querySelectorAll('.products-list .cart-btn');
     // Навішуємо обробник подій на кожну кнопку "Купити"
@@ -65,122 +65,124 @@ getProducts().then(function (products) {
             button.addEventListener('click', addToCart);
         });
     }
-});
-
-// Функція для додавання товару до кошика
-function addToCart(event) {
-    // Отримуємо дані про товар з data-атрибута кнопки
-    let productData = event.currentTarget.getAttribute('data-product');
-    let product = JSON.parse(productData);
-    console.log("Товар додано до кошика:", product);
-    // Тут можна додати логіку для збереження товару в кошику (наприклад, у localStorage)
-}
-
-// Тема сайту (світла/темна)
-const themeToggleBtn = document.getElementById('themeToggle');
-themeToggleBtn.addEventListener('click', function () {
-    document.body.classList.toggle('dark-theme');
-});
-
-// Перевіряємо збережену тему при завантаженні сторінки
-window.addEventListener('load', function () {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-theme');
-    }
-});
-
-// Зберігаємо вибір теми при зміні
-themeToggleBtn.addEventListener('click', function () {
-    if (document.body.classList.contains('dark-theme')) {
-        localStorage.setItem('theme', 'dark');
-    } else {
-        localStorage.setItem('theme', 'light');
-    }  
-});
-
-// cart.js content
-let cart_list = document.querySelector('.cart-items-list')
-let cart_total = document.querySelector('.cart-total')
-let orderBtn = document.querySelector("#orderBtn")
-let orderSection = document.querySelector(".order")
-
-function get_item(item) {
-    return `<div class = "cart-item">
-                <h4 class="cart-item-title">${item.title}</h4>
-                <div class="cart-item-quantity">Кількість: ${item.quantity}</div>
-                <div class="cart-item-price" data-price="${item.price}">${item.price * item.quantity} грн</div>
-            </div>`
-}   
-
-function showCartList() {
-    cart_list.innerHTML = ''
-    for (let key in cart.items) { // проходимося по всіх ключах об'єкта cart.items
-        cart_list.innerHTML += get_item(cart.items[key])
-    }
-    cart_total.innerHTML = cart.calculateTotal()
-}
-
-showCartList()
-
-orderBtn.addEventListener("click", function (event) {
-    orderBtn.style.display = "none"
-    orderSection.style.display = "block"   
-    anime({
-        targets: '.order',
-        opacity: 1, // Кінцева прозорість (1 - повністю видимий)
-        duration: 1000, // Тривалість анімації в мілісекундах
-        easing: 'easeInOutQuad'
-    })
 })
 
-//Розширений функціонал кошика можна додати тут
-let cart = {
-    items: {},
-    addItem: function (product) {
-        if (this.items[product.title]) {
-            this.items[product.title].quantity += 1;
+// Отримуємо кнопку "Кошик"
+const cartBtn = document.getElementById('cartBtn');
+
+// Навішуємо обробник подій на клік кнопки "Кошик"
+cartBtn.addEventListener("click", function () {
+    // Переходимо на сторінку кошика
+    window.location.assign('cart.html');
+});
+
+// Створення класу кошика
+class ShoppingCart {
+    constructor() {
+        this.items = {};
+        this.cartCounter = document.querySelector('.cart-counter');// отримуємо лічильник кількості товарів у кошику
+        this.cartElement = document.querySelector('#cart-items');
+        this.loadCartFromCookies(); // завантажуємо з кукі-файлів раніше додані в кошик товари
+    }
+
+    // Додавання товару до кошика
+    addItem(item) {
+        if (this.items[item.title]) {
+            this.items[item.title].quantity += 1; // Якщо товар вже є, збільшуємо його кількість на одиницю
         } else {
-            this.items[product.title] = {
-                title: product.title,
-                price: product.price,
-                quantity: 1
-            };
+            this.items[item.title] = item; // Якщо товару немає в кошику, додаємо його
+            this.items[item.title].quantity = 1;
         }
-        showCartList();
-    },
-    calculateTotal: function () {
+        this.updateCounter(); // Оновлюємо лічильник товарів
+        this.saveCartToCookies();
+    }
+
+    // Зміна кількості товарів товарів
+    updateQuantity(itemTitle, newQuantity) {
+        if (this.items[itemTitle]) {
+            this.items[itemTitle].quantity = newQuantity;
+            if (this.items[itemTitle].quantity == 0) {
+                delete this.items[itemTitle];
+            }
+            this.updateCounter();
+            this.saveCartToCookies();
+        }
+    }
+
+    // Оновлення лічильника товарів
+    updateCounter() {
+        let count = 0;
+        for (let key in this.items) { // проходимося по всіх ключах об'єкта this.items
+            count += this.items[key].quantity; // рахуємо кількість усіх товарів
+        }
+        this.cartCounter.innerHTML = count; // оновлюємо лічильник на сторінці
+    }
+
+    // Зберігання кошика в кукі
+    saveCartToCookies() {
+        let cartJSON = JSON.stringify(this.items);
+        document.cookie = `cart=${cartJSON}; max-age=${60 * 60 * 24 * 7}; path=/`;
+    }
+
+    // Завантаження кошика з кукі
+    loadCartFromCookies() {
+        let cartCookie = getCookieValue('cart');
+        if (cartCookie && cartCookie !== '') {
+            this.items = JSON.parse(cartCookie);
+            this.updateCounter();
+        }
+    }
+    // Обчислення загальної вартості товарів у кошику
+    calculateTotal() {
         let total = 0;
-        for (let key in this.items) {
-            total += this.items[key].price * this.items[key].quantity;
+        for (let key in this.items) { // проходимося по всіх ключах об'єкта this.items
+            total += this.items[key].price * this.items[key].quantity; // рахуємо вартість усіх товарів
         }
         return total;
     }
 }
 
-//Додавлення товарів до кошика при кліку на кнопку "Купити"
-document.addEventListener('DOMContentLoaded', function () {
-    let buyButtons = document.querySelectorAll('.cart-btn');
-    buyButtons.forEach(function (button) {
-        button.addEventListener('click', function (event) {
-            let productData = event.currentTarget.getAttribute('data-product');
-            let product = JSON.parse(productData);
-            cart.addItem(product);
-        });
-    });
-});
+// Створення об'єкта кошика 
+let cart = new ShoppingCart();
 
-//Перехід до сторінки кошика
-const cartLink = document.getElementById('cartLink');   
-cartLink.addEventListener('click', function (event) {
-    event.preventDefault();
-    window.location.href = 'cart.html';
-}); 
 
-//Перехід до головної сторінки
-const homeLink = document.getElementById('homeLink');  
-homeLink.addEventListener('click', function (event) {
-    event.preventDefault();
-    window.location.href = 'index.html';
-});
+function addToCart(event) {
+    const productData = event.currentTarget.getAttribute('data-product');
+    const product = JSON.parse(productData);
+    cart.addItem(product);
+}
+
+
+// Функція пошуку товарів
+function searchProducts(event) {
+    event.preventDefault(); // Запобігає перезавантаженню сторінки при відправці форми
+
+    let query = document.querySelector('#searchForm input').value.toLowerCase();
+    let productsList = document.querySelector('.products-list');
+    productsList.innerHTML = ''; // Очищуємо список товарів
+
+    // Відображаємо товари на сторінці
+    getProducts().then(function (products) {
+        let productsList = document.querySelector('.products-list')
+        products.forEach(function (product) {
+            if (product.title.toLowerCase().includes(query) || product.description.toLowerCase().includes(query)) {
+                productsList.innerHTML += getCardHTML(product)
+            }
+        })
+
+        // Отримуємо всі кнопки "Купити" на сторінці
+        let buyButtons = document.querySelectorAll('.products-list .cart-btn');
+        // Навішуємо обробник подій на кожну кнопку "Купити"
+        if (buyButtons) {
+            buyButtons.forEach(function (button) {
+                button.addEventListener('click', addToCart);
+            });
+        }
+    })
+}
+
+// Навішуємо обробник подій на форму пошуку
+let searchForm = document.querySelector('#searchForm');
+searchForm.addEventListener('submit', searchProducts);
+
 

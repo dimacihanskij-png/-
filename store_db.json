@@ -2,19 +2,21 @@
     {
         "title": "Пончик з шоколадом",
         "price": 20,
-        "image": "('../img/donat1.jpg')"
+        "image": "donat 1.jpg",
+        "description": "Смачний пончик з шоколадною глазур'ю."
     },
 
     {
         "title": "Пончик з ваніллю",
         "price": 20,
-        "image": "('../img/donat2.jpg')"
+        "image": "donat 2.png",
+        "description": "Пончик з ніжною ванільною начинкою."
     },
 
     {
         "title": "Пончик з полуницею",
         "price": 30,
-        "image": "('../img/donat3.jpg')"
+        "image": "donat 3.png",
+        "description": "Пончик з соковитою полуничною начинкою."
     }
 ]
-

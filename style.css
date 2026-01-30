@@ -3,6 +3,52 @@ body {
     font-family: Cavbria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
+.container-fluid {
+    padding: 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
+    background-color: #ff009d;
+}
+
+.navbar-toggler {
+    background-color: #ffdd00;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.navbar-toggler-icon {
+    width: 25px;
+    height: 5px;
+    background-color: #000000;
+    display: block;
+    position: relative;
+}
+
+.navbar-collapse {
+    margin-top: 10px;
+}
+
+.btn-outline-success {
+    background-color: #1a9a00;
+    color: #000000;
+    border-bottom: 2px solid #1a9a00;
+    padding: 5px 10px;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.form-control {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
 
 nav {
     background-color: #ff009d;
@@ -21,8 +67,22 @@ nav {
     flex-direction: column;
 }
 
+.bg-light {
+    background-color: #ffe600;
+    flex-direction: column;
+}
+
+.my-cart {
+    margin-top: 20px;
+    padding: 10px;
+    border: 2px solid #ff00dd;
+    border-radius: 6px;
+    background-color: #fff0f5;
+}
+
+
 .banner h1 {
-    font-size: 4rem;
+    font-size: 6rem;
     margin-bottom: 15px;
     text-shadow: 2px 2px 4px rgb(242, 255, 0);
     text-align: center;
@@ -37,8 +97,9 @@ nav {
 
 section {
     padding: 20px 10px;
-    background-color: #edd81c;
-    
+    background-color: #ffe600;
+    margin-bottom: 30px;   
+    list-style-type: none;
 }
 
 section h2 {
@@ -81,7 +142,7 @@ button {
     color: #000000;
     border-bottom: 2px solid #005bb5;
     padding: 5px 10px;
-    border-radius: 2px;
+    border-radius: 4px;
     cursor: pointer;
     font-size: 1rem;
 }
@@ -94,6 +155,48 @@ button:hover {
 button:active {
     transform: translateY(2px) translateX(3px);
     background-color: #005bb5;
+}
+
+.nav-link {
+    background-color: #0088ff;
+    color: #000000;
+    border-bottom: 2px solid #005bb5;
+    padding: 5px 5px;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.nav-link:hover {
+    background-color: #4000ff;
+    color: #ffffff;   
+}
+
+.nav-link:active {
+    transform: translateY(2px) translateX(3px);
+    background-color: #005bb5;
+}
+
+.cart-counter {
+    background-color: #ff0000;
+    color: #ffffff;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.8rem;
+    position: absolute;
+    top: -5px;
+    right: -10px;
+}
+
+.d-flex {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.navbar nav {
+    position: relative;
+    padding: 10px 20px;
 }
 
 input[type="text"], input[type="email"], textarea {
@@ -237,23 +340,6 @@ footer a:hover {
     margin-top: 15px;   
 }
 
-footer p {
-    margin: 5px 0;
-    font-size: 0.9rem;
-    font-variant: normal;
-    font-weight: 400;
-    font-style: normal;
-    line-height: 1.5;
-    letter-spacing: normal;
-    text-transform: none;
-    text-decoration: none;
-}
-
-footer a {
-    color: #0000ff;
-    text-decoration: none;
-}
-
 footer a:hover {
     text-decoration: underline;
 }
@@ -265,6 +351,119 @@ footer top {
     font-size: 1.2rem;
     color: #0000ff;
 }
+
+footer.bottom {
+    margin-bottom: 10px;
+    font-display: auto;
+    font-family: 'Arial Black', Gadget, sans-serif;
+    font-size: 1.2rem;
+    color: #0000ff;
+}
+
+select.form-select {
+    border: 1px solid #2f3be2;
+    border-radius: 4px;
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+select.form-select:focus {
+    border-color: #008cff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 140, 255, 0.5);
+}
+
+select.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #0000ff;
+}
+select.form-group {
+    margin-bottom: 15px;
+    font-variant: normal;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+}  
+
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #0000ff;
+}
+
+.form-group input, .form-group textarea {
+    border: 5px solid #2f3be2;
+    border-radius: 4px;
+    padding: 3px;
+    width: 100%;
+    box-shadow: 0 0 5px rgba(19, 34, 115, 0.83);
+    font-size: 1rem;
+    margin-bottom: 22px;
+}
+
+.form-group button {
+    background-color: #008cff;
+    color: #000000;
+    border-bottom: 2px solid #200505;
+    padding: 5px 10px;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.form-group button:hover {
+    background-color: #4000ff;
+    color: #ffffff;   
+
+}
+
+.form-group button:active {
+    transform: translateY(2px) translateX(3px);
+    background-color: #005bb5;
+}
+
+a.btn {
+    background-color: #008cff;
+    color: #000000;
+    border-bottom: 2px solid #005bb5;
+    padding: 5px 10px;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-align: center;
+    display: inline-block;
+}
+
+a.btn:hover {
+    background-color: #4000ff;
+    color: #ffffff;   
+}   
+
+a.btn:active {
+    transform: translateY(2px) translateX(3px);
+    background-color: #005bb5;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
