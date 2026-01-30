@@ -93,7 +93,7 @@ class ShoppingCart {
             this.items[item.title] = item; // Якщо товару немає в кошику, додаємо його
             this.items[item.title].quantity = 1;
         }
-        this.updateCounter(); // Оновлюємо лічильник товарів
+        //this.updateCounter(); // Оновлюємо лічильник товарів
         this.saveCartToCookies();
     }
 
@@ -104,7 +104,7 @@ class ShoppingCart {
             if (this.items[itemTitle].quantity == 0) {
                 delete this.items[itemTitle];
             }
-            this.updateCounter();
+            //this.updateCounter();
             this.saveCartToCookies();
         }
     }
@@ -129,7 +129,7 @@ class ShoppingCart {
         let cartCookie = getCookieValue('cart');
         if (cartCookie && cartCookie !== '') {
             this.items = JSON.parse(cartCookie);
-            this.updateCounter();
+            //this.updateCounter();
         }
     }
     // Обчислення загальної вартості товарів у кошику
