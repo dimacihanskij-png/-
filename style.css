@@ -140,7 +140,7 @@ footer p {
 button {
     background-color: #008cff;
     color: #000000;
-    border-bottom: 2px solid #005bb5;
+    border-bottom: 2px solid #0e3860;
     padding: 5px 10px;
     border-radius: 4px;
     cursor: pointer;
@@ -160,7 +160,7 @@ button:active {
 .nav-link {
     background-color: #0088ff;
     color: #000000;
-    border-bottom: 2px solid #005bb5;
+    border-bottom: 2px solid #000000;
     padding: 5px 5px;
     border-radius: 2px;
     cursor: pointer;

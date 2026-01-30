@@ -80,7 +80,7 @@ cartBtn.addEventListener("click", function () {
 class ShoppingCart {
     constructor() {
         this.items = {};
-        this.cartCounter = document.querySelector('.cart-counter');// отримуємо лічильник кількості товарів у кошику
+        //this.cartCounter = document.querySelector('.cart-counter');// отримуємо лічильник кількості товарів у кошику
         this.cartElement = document.querySelector('#cart-items');
         this.loadCartFromCookies(); // завантажуємо з кукі-файлів раніше додані в кошик товари
     }
@@ -108,7 +108,7 @@ class ShoppingCart {
             this.saveCartToCookies();
         }
     }
-
+    /*
     // Оновлення лічильника товарів
     updateCounter() {
         let count = 0;
@@ -117,7 +117,7 @@ class ShoppingCart {
         }
         this.cartCounter.innerHTML = count; // оновлюємо лічильник на сторінці
     }
-
+    */
     // Зберігання кошика в кукі
     saveCartToCookies() {
         let cartJSON = JSON.stringify(this.items);
@@ -147,9 +147,12 @@ let cart = new ShoppingCart();
 
 
 function addToCart(event) {
-    const productData = event.currentTarget.getAttribute('data-product');
+    const button = event.currentTarget;
+    const productData = button.dataset.product;
     const product = JSON.parse(productData);
+
     cart.addItem(product);
+    console.log(cart);
 }
 
 
